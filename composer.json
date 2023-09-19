@@ -16,12 +16,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Root23\\JsonCanonicalizator\\": "src"
+            "Root23\\JsonCanonicalizer\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Root23\\JsonCanonicalizator\\Tests\\": "tests"
+            "Root23\\JsonCanonicalizer\\Tests\\": "tests"
         }
     }
 }

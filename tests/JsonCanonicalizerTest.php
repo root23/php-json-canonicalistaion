@@ -2,131 +2,130 @@
 
 declare(strict_types=1);
 
-namespace Root23\JsonCanonicalizator\Tests;
+namespace Root23\JsonCanonicalizer\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Root23\JsonCanonicalizator\JsonCanonicalizatorFactory;
+use Root23\JsonCanonicalizer\JsonCanonicalizer;
 
-class JsonCanonicalizatorTest extends TestCase
+class JsonCanonicalizerTest extends TestCase
 {
     public function testArray(): void
     {
-        $instance = JsonCanonicalizatorFactory::getInstance();
+        $instance = new JsonCanonicalizer();
 
         $input = $this->getInputData('arrays');
         $output = $this->getOutputData('arrays', false);
 
-        self::assertEquals($output, $instance->canonicalize($input, false));
+        self::assertEquals($output, $instance->canonicalize($input));
     }
-
     public function testArrayHex(): void
     {
-        $instance = JsonCanonicalizatorFactory::getInstance();
+        $instance = new JsonCanonicalizer();
 
         $input = $this->getInputData('arrays');
         $output = $this->getOutputData('arrays', true);
 
-        self::assertEquals($output, $instance->canonicalize($input, true));
+        self::assertEquals($output, $instance->canonicalizeAsHex($input));
     }
 
     public function testRussian(): void
     {
-        $instance = JsonCanonicalizatorFactory::getInstance();
+        $instance = new JsonCanonicalizer();
 
         $input = $this->getInputData('russian');
         $output = $this->getOutputData('russian', false);
 
-        self::assertEquals($output, $instance->canonicalize($input, false));
+        self::assertEquals($output, $instance->canonicalize($input));
     }
 
     public function testRussianHex(): void
     {
-        $instance = JsonCanonicalizatorFactory::getInstance();
+        $instance = new JsonCanonicalizer();
 
         $input = $this->getInputData('russian');
         $output = $this->getOutputData('russian', true);
 
-        self::assertEquals($output, $instance->canonicalize($input, true));
+        self::assertEquals($output, $instance->canonicalizeAsHex($input));
     }
 
     public function testStructures(): void
     {
-        $instance = JsonCanonicalizatorFactory::getInstance();
+        $instance = new JsonCanonicalizer();
 
         $input = $this->getInputData('structures');
         $output = $this->getOutputData('structures', false);
 
-        self::assertEquals($output, $instance->canonicalize($input, false));
+        self::assertEquals($output, $instance->canonicalize($input));
     }
 
     public function testStructuresHex(): void
     {
-        $instance = JsonCanonicalizatorFactory::getInstance();
+        $instance = new JsonCanonicalizer();
 
         $input = $this->getInputData('structures');
         $output = $this->getOutputData('structures', true);
 
-        self::assertEquals($output, $instance->canonicalize($input, true));
+        self::assertEquals($output, $instance->canonicalizeAsHex($input));
     }
 
     public function testUnicode(): void
     {
-        $instance = JsonCanonicalizatorFactory::getInstance();
+        $instance = new JsonCanonicalizer();
 
         $input = $this->getInputData('unicode');
         $output = $this->getOutputData('unicode', false);
 
-        self::assertEquals($output, $instance->canonicalize($input, false));
+        self::assertEquals($output, $instance->canonicalize($input));
     }
 
     public function testUnicodeHex(): void
     {
-        $instance = JsonCanonicalizatorFactory::getInstance();
+        $instance = new JsonCanonicalizer();
 
         $input = $this->getInputData('unicode');
         $output = $this->getOutputData('unicode', true);
 
-        self::assertEquals($output, $instance->canonicalize($input, true));
+        self::assertEquals($output, $instance->canonicalizeAsHex($input));
     }
 
     public function testValues(): void
     {
-        $instance = JsonCanonicalizatorFactory::getInstance();
+        $instance = new JsonCanonicalizer();
 
         $input = $this->getInputData('values');
         $output = $this->getOutputData('values', false);
 
-        self::assertEquals($output, $instance->canonicalize($input, false));
+        self::assertEquals($output, $instance->canonicalize($input));
     }
 
     public function testValuesHex(): void
     {
-        $instance = JsonCanonicalizatorFactory::getInstance();
+        $instance = new JsonCanonicalizer();
 
         $input = $this->getInputData('values');
         $output = $this->getOutputData('values', true);
 
-        self::assertEquals($output, $instance->canonicalize($input, true));
+        self::assertEquals($output, $instance->canonicalizeAsHex($input));
     }
 
     public function testWeird(): void
     {
-        $instance = JsonCanonicalizatorFactory::getInstance();
+        $instance = new JsonCanonicalizer();
 
         $input = $this->getInputData('weird');
         $output = $this->getOutputData('weird', false);
 
-        self::assertEquals($output, $instance->canonicalize($input, false));
+        self::assertEquals($output, $instance->canonicalize($input));
     }
 
     public function testWeirdHex(): void
     {
-        $instance = JsonCanonicalizatorFactory::getInstance();
+        $instance = new JsonCanonicalizer();
 
         $input = $this->getInputData('weird');
         $output = $this->getOutputData('weird', true);
 
-        self::assertEquals($output, $instance->canonicalize($input, true));
+        self::assertEquals($output, $instance->canonicalizeAsHex($input));
     }
 
     private function getInputData(string $fileName): mixed
