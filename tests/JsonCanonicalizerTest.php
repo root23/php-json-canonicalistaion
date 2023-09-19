@@ -130,14 +130,14 @@ class JsonCanonicalizerTest extends TestCase
 
     private function getInputData(string $fileName): mixed
     {
-        $file = file_get_contents(__DIR__ . '/TestData/input/' . $fileName . '.json');
+        $file = file_get_contents(__DIR__ . '/Fixtures/input/' . $fileName . '.json');
 
         return json_decode($file);
     }
 
     private function getOutputData(string $fileName, bool $isHex): string
     {
-        $path = __DIR__ . '/TestData/output/'. $fileName;
+        $path = __DIR__ . '/Fixtures/output/' . $fileName;
         $path .= ($isHex) ? '_hex.txt' : '.txt';
 
         $file = file_get_contents($path);

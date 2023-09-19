@@ -4,11 +4,6 @@ namespace Root23\JsonCanonicalizer;
 
 class Converter
 {
-    public static function isArrayAssoc(array $array): bool
-    {
-        return [] !== $array && !array_is_list($array);
-    }
-
     public static function toHex(string $data): string
     {
         return rtrim(chunk_split(bin2hex($data), 2, ' '));

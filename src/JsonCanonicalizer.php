@@ -6,6 +6,8 @@ namespace Root23\JsonCanonicalizer;
 
 final class JsonCanonicalizer implements JsonCanonicalizerInterface
 {
+    use ArrayHelperTrait;
+
     public const JSON_FLAGS = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
     public const ENCODING = 'UTF-16BE';
 
@@ -38,7 +40,7 @@ final class JsonCanonicalizer implements JsonCanonicalizerInterface
             return json_encode($item, JSON_THROW_ON_ERROR | self::JSON_FLAGS);
         }
 
-        if (is_array($item) && !Converter::isArrayAssoc($item)) {
+        if (is_array($item) && !self::isArrayAssoc($item)) {
             $result = '[';
 
             $next = false;
