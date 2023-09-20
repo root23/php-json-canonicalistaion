@@ -30,7 +30,7 @@ final class JsonCanonicalizer implements JsonCanonicalizerInterface
     /**
      * @throws \JsonException
      */
-    private function encode($item): bool|string
+    private function encode($item): string
     {
         if (is_float($item)) {
             return Converter::toEs6NumberFormat($item);
