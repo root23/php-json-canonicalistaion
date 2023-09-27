@@ -16,7 +16,10 @@ final class JsonCanonicalizer implements JsonCanonicalizerInterface
      */
     public function canonicalize($data): string
     {
-        return $this->encode($data);
+        ob_start();
+        $this->encode($data);
+
+        return ob_get_clean();
     }
 
     /**
@@ -24,36 +27,41 @@ final class JsonCanonicalizer implements JsonCanonicalizerInterface
      */
     public function canonicalizeAsHex($data): string
     {
-        return Converter::toHex($this->encode($data));
+        ob_start();
+        $this->encode($data);
+
+        return Converter::toHex(ob_get_clean());
     }
 
     /**
      * @throws \JsonException
      */
-    private function encode($item): string
+    private function encode($item): void
     {
         if (is_float($item)) {
-            return Converter::toEs6NumberFormat($item);
+            echo Converter::toEs6NumberFormat($item);
+            return;
         }
 
         if (is_null($item) || is_scalar($item)) {
-            return json_encode($item, JSON_THROW_ON_ERROR | self::JSON_FLAGS);
+            echo json_encode($item, JSON_THROW_ON_ERROR | self::JSON_FLAGS);
+            return;
         }
 
         if (is_array($item) && !self::isArrayAssoc($item)) {
-            $result = '[';
+            echo '[';
 
             $next = false;
             foreach ($item as $element) {
                 if ($next) {
-                    $result .= ',';
+                    echo ',';
                 }
                 $next = true;
-                $result .= $this->encode($element);
+                $this->encode($element);
             }
-            $result .= ']';
+            echo ']';
 
-            return $result;
+            return;
         }
 
         if (is_object($item)) {
@@ -67,18 +75,16 @@ final class JsonCanonicalizer implements JsonCanonicalizerInterface
             return strcmp($a, $b);
         });
 
-        $str = '{';
+        echo '{';
         $next = false;
         foreach ($item as $key => $value) {
             if ($next) {
-                $str .= ',';
+                echo ',';
             }
             $next = true;
             $outKey = json_encode((string)$key, JSON_THROW_ON_ERROR | self::JSON_FLAGS);
-            $str .= $outKey . ':' . $this->encode($value);
+            echo $outKey, ':', $this->encode($value);
         }
-        $str .= '}';
-
-        return $str;
+        echo '}';
     }
 }
