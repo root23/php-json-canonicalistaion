@@ -1,4 +1,4 @@
-# php-json-canonicalistaion
+# php-json-canonicalization
 Serialize data into canonical way, based on RFC-8785.
 
 RFC-8785 - https://tools.ietf.org/html/rfc8785
